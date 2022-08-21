@@ -67,6 +67,7 @@ class ProductController extends Controller
 
     // update product page
     public function updateProduct(Request $request){
+        
         $id = $request->id;
 
         Product::findOrFail($id)->update([
