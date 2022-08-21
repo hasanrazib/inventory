@@ -54,7 +54,37 @@ class ProductController extends Controller
         return redirect()->route('view.products')->with($notification); 
     }
 
+    // edit product page
+    public function editProduct($id){
+        $suppliers = Supplier::all();
+        $categories = Category::all();
+        $units = Unit::all();
+        $product = Product::findOrFail($id);
+        return view('backend.product.edit_product',compact('product','suppliers','categories','units'));
+    }
 
+
+
+    // update product page
+    public function updateProduct(Request $request){
+        $id = $request->id;
+
+        Product::findOrFail($id)->update([
+            'name' => $request->name,
+            'supplier_id' => $request->supplier_id,
+            'unit_id' => $request->unit_id,
+            'category_id' => $request->category_id,
+            'updated_by' => Auth::User()->id,
+            'updated_at' => Carbon::now()
+        ]);
+
+        $notification = array(
+            'message' => 'Product Updated Successfully', 
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('view.products')->with($notification);
+    }
 
     // delete method
     public function deleteProduct($id){
@@ -70,5 +100,7 @@ class ProductController extends Controller
     }//end method
 
 
+
+    
 
 }
