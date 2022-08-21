@@ -73,6 +73,7 @@
                                     <span>Manage Purchase</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
+                                    <li><a href="{{ route('add.purchase') }}">Add Puchase</a></li>
                                     <li><a href="{{ route('view.purchases') }}">View All Purchases</a></li>
 
                                 </ul>

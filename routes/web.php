@@ -106,7 +106,7 @@ Route::controller(ProductController::class)->group(function () {
 
 // Purchase All Controller
 Route::controller(PurchaseController::class)->group(function () {
-    Route::get('/product/add', 'addProduct')->name('add.product');
+    Route::get('/purchases/add', 'addPurchase')->name('add.purchase');
     Route::post('/product/insert', 'insertProduct')->name('insert.product');
     Route::get('/product/edit/{id}','editProduct')->name('edit.product');
     Route::post('/product/update/','updateProduct')->name('update.product');

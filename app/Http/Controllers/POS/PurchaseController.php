@@ -14,10 +14,15 @@ use Auth;
 
 class PurchaseController extends Controller
 {
-    //
-
+    public function addPurchase(){
+        $suppliers = Supplier::all();
+        $categories = Category::all();
+        return view('backend.purchase.add_purchase',compact('suppliers'));
+    }
+    
+    // view all purchase
     public function viewAllPurchases(){
-        $purchases = Purchase::all();
+        $purchases = Purchase::orderBy('date','desc')->orderBy('id','desc');
         return view('backend.purchase.view_all_purchases',compact('purchases'));
     }
 }
