@@ -8,6 +8,8 @@ use App\Http\Controllers\POS\CustomerController;
 use App\Http\Controllers\POS\UnitController;
 use App\Http\Controllers\POS\CategoryController;
 use App\Http\Controllers\POS\ProductController;
+use App\Http\Controllers\POS\PurchaseController;
+
 
 
 
@@ -100,6 +102,23 @@ Route::controller(ProductController::class)->group(function () {
     
      
 });
+
+
+// Purchase All Controller
+Route::controller(PurchaseController::class)->group(function () {
+    Route::get('/product/add', 'addProduct')->name('add.product');
+    Route::post('/product/insert', 'insertProduct')->name('insert.product');
+    Route::get('/product/edit/{id}','editProduct')->name('edit.product');
+    Route::post('/product/update/','updateProduct')->name('update.product');
+    Route::get('/product/delete/{id}','deleteProduct')->name('delete.product');
+    Route::get('/purchases/all', 'viewAllPurchases')->name('view.purchases');
+   
+   
+    
+     
+});
+
+
 
 
 Route::get('/dashboard', function () {
