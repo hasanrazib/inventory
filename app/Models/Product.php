@@ -20,7 +20,7 @@ class Product extends Model
     }
 
     public function unit(){
-        return $this->belongsTO(Unit::class,'unit_id','id');
+        return $this->belongsTo(Unit::class,'unit_id','id');
     }
 
 
