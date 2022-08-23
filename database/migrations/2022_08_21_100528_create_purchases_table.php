@@ -23,6 +23,7 @@ return new class extends Migration
             $table->double('buying_qty');
             $table->double('unit_price');
             $table->double('buying_price');
+            $table->string('description')->nullable();
             $table->tinyInteger('status')->default('0')->comment('0=Pending, 1=Approved');
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
