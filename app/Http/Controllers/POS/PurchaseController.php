@@ -63,7 +63,18 @@ class PurchaseController extends Controller
     
     
     
-    
+    // delete purchase method
+    public function deletePurchase($id){
+
+        Purchase::findOrFail($id)->delete();
+
+        $notification = array(
+            'message' => 'Purchase Deleted Successfully', 
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);  
+    }
     
     // view all purchase
     public function viewAllPurchases(){

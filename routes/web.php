@@ -110,6 +110,7 @@ Route::controller(ProductController::class)->group(function () {
 Route::controller(PurchaseController::class)->group(function () {
     Route::get('/purchases/add', 'addPurchase')->name('add.purchase');
     Route::post('/purchases/insert', 'insertPurchase')->name('insert.purchase');
+    Route::get('/purchases/delete/{id}','deletePurchase')->name('delete.purchase');
     Route::get('/purchases/all', 'viewAllPurchases')->name('view.purchases');
    
    

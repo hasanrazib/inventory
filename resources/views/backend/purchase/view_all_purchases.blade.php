@@ -49,7 +49,7 @@
                                     <td> {{ $item->buying_qty }} </td> 
                                     <td> {{ $item ['product']['name'] }} </td> 
                                     <td> <span class="btn btn-warning">Pending</span> </td> 
-                                    <td><a href="" class="btn btn-danger sm" title="Delete Data" id="delete">  <i class="fas fa-trash-alt"></i> </a></td>
+                                    <td><a href="{{route('delete.purchase', $item->id)}}" class="btn btn-danger sm" title="Delete Data" id="delete">  <i class="fas fa-trash-alt"></i> </a></td>
                                 </tr>
                             @endforeach
 
