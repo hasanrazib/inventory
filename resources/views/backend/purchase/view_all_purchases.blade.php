@@ -48,8 +48,17 @@
                                     <td> {{ $item ['category']['cat_name'] }} </td> 
                                     <td> {{ $item->buying_qty }} </td> 
                                     <td> {{ $item ['product']['name'] }} </td> 
-                                    <td> <span class="btn btn-warning">Pending</span> </td> 
-                                    <td><a href="{{route('delete.purchase', $item->id)}}" class="btn btn-danger sm" title="Delete Data" id="delete">  <i class="fas fa-trash-alt"></i> </a></td>
+                                    <td>
+                                        @if($item->status == '0')
+                                        <span class="btn btn-warning">Pending</span>
+                                        @elseif($item->status == '1')
+                                        <span class="btn btn-success">Approved</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                    @if($item->status == '0')    
+                                    <a href="{{route('delete.purchase', $item->id)}}" class="btn btn-danger sm" title="Delete Data" id="delete">  <i class="fas fa-trash-alt"></i> </a></td>
+                                    @endif
                                 </tr>
                             @endforeach
 

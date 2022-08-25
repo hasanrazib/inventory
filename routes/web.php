@@ -111,11 +111,12 @@ Route::controller(PurchaseController::class)->group(function () {
     Route::get('/purchases/add', 'addPurchase')->name('add.purchase');
     Route::post('/purchases/insert', 'insertPurchase')->name('insert.purchase');
     Route::get('/purchases/delete/{id}','deletePurchase')->name('delete.purchase');
+    Route::get('/purchases/pending','pendingPurchase')->name('pending.purchase');
+    Route::get('/purchase/approve/{id}', 'approvePurchase')->name('approve.purchase');
     Route::get('/purchases/all', 'viewAllPurchases')->name('view.purchases');
-   
-   
     
-     
+   
+
 });
 
 // Default Controller

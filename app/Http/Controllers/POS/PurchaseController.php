@@ -14,10 +14,21 @@ use Auth;
 
 class PurchaseController extends Controller
 {
+    // view all purchase
+    public function viewAllPurchases(){
+
+        $purchases = Purchase::orderBy('date','desc')->orderBy('id','desc')->get();
+
+        return view('backend.purchase.view_all_purchases',compact('purchases'));
+    }
+
+
     // add purchase 
     public function addPurchase(){
+
         $suppliers = Supplier::all();
         $categories = Category::all();
+
         return view('backend.purchase.add_purchase',compact('suppliers','categories'));
     }
     
@@ -29,8 +40,9 @@ class PurchaseController extends Controller
            $notification = array(
             'message' => 'Sorry you do not select any item', 
             'alert-type' => 'error'
-        );
+            );
         return redirect()->back( )->with($notification);
+
         } else {
     
             $count_category = count($request->category_id);
@@ -51,20 +63,56 @@ class PurchaseController extends Controller
                 $purchase->status = '0';
                 $purchase->save();
             } // end foreach
+
         } // end else 
     
         $notification = array(
             'message' => 'Data Save Successfully', 
             'alert-type' => 'success'
         );
+
         return redirect()->route('view.purchases')->with($notification); 
+
         }// End Method 
     
     
     
+    // pending purchase
+    public function pendingPurchase(){
+        $pendings = Purchase::orderBy('date','desc')->orderBy('id','desc')->where('status','0')->get();
+
+        return view('backend.purchase.pending_purchase',compact('pendings'));
+    }
+   
     
-    // delete purchase method
-    public function deletePurchase($id){
+   
+    // approve function
+    public function approvePurchase($id){
+
+        $purchase = Purchase::findOrFail($id);
+        $product = Product::where('id',$purchase->product_id)->first();
+        $purchase_qty = ((float)($purchase->buying_qty))+((float)($product->quantity));
+        $product->quantity = $purchase_qty;
+
+        if($product->save()){
+
+            Purchase::findOrFail($id)->update([
+                'status' => '1',
+            ]);
+
+             $notification = array(
+            'message' => 'Status Approved Successfully', 
+            'alert-type' => 'success'
+            );
+        return redirect()->route('view.purchases')->with($notification); 
+
+        }
+
+    }// End Method 
+
+
+     // delete purchase method
+     public function deletePurchase($id){
 
         Purchase::findOrFail($id)->delete();
 
@@ -74,12 +122,5 @@ class PurchaseController extends Controller
         );
 
         return redirect()->back()->with($notification);  
-    }
-    
-    // view all purchase
-    public function viewAllPurchases(){
-
-        $purchases = Purchase::orderBy('date','desc')->orderBy('id','desc')->get();
-        return view('backend.purchase.view_all_purchases',compact('purchases'));
     }
 }
