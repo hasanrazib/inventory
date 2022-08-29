@@ -24,12 +24,20 @@ class DefaultController extends Controller
     }//end method
 
     // get products by ajax filtering
-    public function GetProduct(Request $request){
+    public function getProduct(Request $request){
 
         $category_id = $request->category_id; 
         $allProduct = Product::where('category_id',$category_id)->get();
         return response()->json($allProduct);
     } // end mehtod 
 
+    public function getStock(Request $request){
+        $product_id = $request->product_id;
+        $stocks = Product::where('id',$product_id)->first()->quantity;
+
+        return response()->json($stocks);
+    }
+
+    
 
 }

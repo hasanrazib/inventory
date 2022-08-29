@@ -18,7 +18,7 @@
                 <div class="card">
                 <div class="card-body">
 
-                    <a href="{{ route('add.invoice') }}" class="btn btn-dark btn-rounded waves-effect waves-light" style="float:right;">Add Purchase </a> <br>  <br>               
+                    <a href="{{ route('add.invoice') }}" class="btn btn-dark btn-rounded waves-effect waves-light" style="float:right;">Add Invoice </a> <br>  <br>               
 
                     <h4 class="card-title">Invoice All Data </h4>
 
@@ -27,13 +27,10 @@
                         <thead>
                         <tr>
                             <th>Sl</th>
-                            <th>Purhase No</th> 
+                            <th>Customer Name</th> 
+                            <th>Invoice No </th>
                             <th>Date </th>
-                            <th>Supplier</th>
-                            <th>Category</th> 
-                            <th>Qty</th> 
-                            <th>Product Name</th> 
-                            <th>Status</th>
+                            <th>Desctipion</th>  
                             <th>Action</th>
 
                         </thead>
@@ -42,9 +39,9 @@
                             @foreach($invoices as $key => $item)
                                 <tr>
                                     <td> {{ $key+1}} </td>
-                                    <td> {{ $item->purchase_no }} </td> 
-                                    <td> {{ $item->date }} </td> 
-                                    <td> {{ $item ['supplier']['name'] }} </td> 
+                                    <td> {{ $item->invoice_no }} </td> 
+                                    <td> {{ date('d-m-Y',strtotime($item->date)) }} </td> 
+                                    <td> {{ $item->invoice_no }} </td> 
                                     <td> {{ $item ['category']['cat_name'] }} </td> 
                                     <td> {{ $item->buying_qty }} </td> 
                                     <td> {{ $item ['product']['name'] }} </td> 

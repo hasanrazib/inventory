@@ -26,8 +26,18 @@ class InvoiceController extends Controller
         return view('backend.invoice.view_all_invoices',compact('invoices'));
     }
 
-    // invoice add
+    // invoice addf
     public function addInvoice(){
-
+        $date = date('Y-m-d');
+        $invoice_no = Invoice::orderBy('id','desc')->first();
+        if($invoice_no == null){
+            $num = '0';
+            $invoice_no = $num + 1;
+        }else{
+            $invoice_no = Invoice::orderBy('id','desc')->first();
+            $invoice_no = $invoice_no + 1;
+        }
+        $categories = Category::all();
+        return view ('backend.invoice.add_invoice',compact('categories','date','invoice_no'));   
     }
 }

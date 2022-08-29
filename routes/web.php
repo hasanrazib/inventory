@@ -136,8 +136,8 @@ Route::controller(InvoiceController::class)->group(function () {
 // Default Controller
 Route::controller(DefaultController::class)->group(function () {
     Route::get('/get-category', 'getCategory')->name('get-category');
-    Route::get('/get-product', 'GetProduct')->name('get-product');
-  
+    Route::get('/get-product', 'getProduct')->name('get-product');
+    Route::get('/get-stock', 'getStock')->name('get-check-stock');
    
    
     
