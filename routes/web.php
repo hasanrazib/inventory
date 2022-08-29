@@ -124,6 +124,7 @@ Route::controller(PurchaseController::class)->group(function () {
 // Invoice All Controller
 Route::controller(InvoiceController::class)->group(function () {
     Route::get('/invoice/add', 'addInvoice')->name('add.invoice');
+    Route::post('/invoice/insert', 'insertInvoice')->name('insert.invoice');
     Route::get('/invoice/all', 'viewAllInvoice')->name('view.invoices');
     
     

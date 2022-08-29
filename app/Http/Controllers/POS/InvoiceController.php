@@ -26,7 +26,7 @@ class InvoiceController extends Controller
         return view('backend.invoice.view_all_invoices',compact('invoices'));
     }
 
-    // invoice addf
+    // invoice add
     public function addInvoice(){
         $date = date('Y-m-d');
         $invoice_no = Invoice::orderBy('id','desc')->first();
@@ -39,5 +39,20 @@ class InvoiceController extends Controller
         }
         $categories = Category::all();
         return view ('backend.invoice.add_invoice',compact('categories','date','invoice_no'));   
+    }//end method
+
+    // invoice insert 
+    public function insertInvoice(Request $request){
+
+        if ($request->category_id == null) {
+    
+            $notification = array(
+             'message' => 'Sorry you do not select any item', 
+             'alert-type' => 'error'
+             );
+
+        return redirect()->back( )->with($notification);
+ 
+        }
     }
 }
