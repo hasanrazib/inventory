@@ -9,7 +9,9 @@ use App\Http\Controllers\POS\UnitController;
 use App\Http\Controllers\POS\CategoryController;
 use App\Http\Controllers\POS\ProductController;
 use App\Http\Controllers\POS\PurchaseController;
+use App\Http\Controllers\POS\InvoiceController;
 use App\Http\Controllers\POS\DefaultController;
+
 
 
 
@@ -118,6 +120,18 @@ Route::controller(PurchaseController::class)->group(function () {
    
 
 });
+
+// Invoice All Controller
+Route::controller(InvoiceController::class)->group(function () {
+    Route::get('/invoice/add', 'addInvoice')->name('add.invoice');
+    Route::get('/invoice/all', 'viewAllInvoice')->name('view.invoices');
+    
+    
+
+});
+
+
+
 
 // Default Controller
 Route::controller(DefaultController::class)->group(function () {

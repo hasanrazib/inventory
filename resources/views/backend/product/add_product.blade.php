@@ -27,7 +27,7 @@
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">Supplier Name </label>
                 <div class="col-sm-10">
-                    <select name="supplier_id" class="form-select" aria-label="Default select example">
+                    <select name="supplier_id" class="form-select select2" aria-label="Default select example">
                         <option selected="">Open this select menu</option>
                         @foreach($suppliers as $item)
                         <option value="{{$item->id}}">{{$item->name}}</option>
@@ -39,7 +39,7 @@
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">Category Name </label>
                 <div class="col-sm-10">
-                    <select name="category_id" class="form-select" aria-label="Default select example">
+                    <select name="category_id" class="form-select select2" aria-label="Default select example">
                         <option selected="">Open this select menu</option>
                         @foreach($categories as $item)
                         <option value="{{$item->id}}">{{$item->cat_name}}</option>
@@ -51,7 +51,7 @@
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">Unit Name </label>
                 <div class="col-sm-10">
-                    <select name="unit_id" class="form-select" aria-label="Default select example">
+                    <select name="unit_id" class="form-select select2" aria-label="Default select example">
                         <option selected="">Open this select menu</option>
                         @foreach($units as $item)
                         <option value="{{$item->id}}">{{$item->unit_name}}</option>

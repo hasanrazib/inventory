@@ -17,7 +17,8 @@
 
         <!-- DataTables -->
         <link href="{{ asset('backend/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
-
+        <!-- Select 2 -->
+        <link href="{{ asset('backend/assets/libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css">
         <!-- Responsive datatable examples -->
         <link href="{{ asset('backend/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />  
 
@@ -102,10 +103,15 @@
         <script src="{{ asset('backend/assets/js/app.js') }}"></script>
         <script src="{{ asset('backend/assets/js/validate.min.js') }}"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+       
         <script src="{{ asset('backend/assets/js/code.js') }}"></script>
         <!-- handlebar -->
         <script src="{{ asset('backend/assets/js/handlebar.js') }}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js" ></script>
+         <!--  For Select2 -->
+         <script src="{{ asset('backend/assets/libs/select2/js/select2.min.js') }}"></script>
+        <script src="{{ asset('backend/assets/js/pages/form-advanced.init.js') }}"></script>
+        <!-- end  For Select2 -->
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 <script>
