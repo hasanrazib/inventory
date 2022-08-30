@@ -85,7 +85,7 @@
                                     <span>Manage Invoice</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="{{ route('add.invoice') }}">Add Puchase</a></li>
+                                    <li><a href="{{ route('add.invoice') }}">Add Invoice</a></li>
                                     <li><a href="{{ route('view.invoices') }}">View All Invoices</a></li>
                                     
                                 </ul>

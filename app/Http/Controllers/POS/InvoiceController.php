@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Models\Supplier;
+use App\Models\Customer;
 use App\Models\Unit;
 use App\Models\Category;
 use App\Models\Product;
@@ -38,21 +39,38 @@ class InvoiceController extends Controller
             $invoice_no = $invoice_no + 1;
         }
         $categories = Category::all();
-        return view ('backend.invoice.add_invoice',compact('categories','date','invoice_no'));   
+        $costomers = Customer::all();
+        return view ('backend.invoice.add_invoice',compact('categories','date','invoice_no','costomers'));   
     }//end method
 
     // invoice insert 
     public function insertInvoice(Request $request){
-
-        if ($request->category_id == null) {
-    
+        $category_id = $request->category_id;
+        if($category_id == null){
+            
             $notification = array(
-             'message' => 'Sorry you do not select any item', 
-             'alert-type' => 'error'
-             );
+                'message' => 'Sorry You do not select any item', 
+                'alert-type' => 'error'
+            );
 
-        return redirect()->back( )->with($notification);
- 
+            return redirect()->back()->with($notification);
+        }else{
+            if($request->paid_amount > $request->estimated_amount){
+
+                $notification = array(
+                    'message' => 'Sorry Paid Amount is Maximum the total price', 
+                    'alert-type' => 'error'
+                    );
+                return redirect()->back()->with($notification);
+            }else{
+                $invoice = new Invoice();
+                $invoice->invoice_no = $request->invoice_no;
+                $invoice->date = date('Y-m-d',strtotime($request->date));
+            }
+
         }
-    }
+        
+
+        
+    } //end method
 }
