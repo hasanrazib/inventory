@@ -16,6 +16,7 @@ use App\Models\Invoice;
 use App\Models\InvoiceDetail;
 use App\Models\Payment;
 use App\Models\PaymentDetail;
+use DB;
 
 
 class InvoiceController extends Controller
@@ -33,23 +34,23 @@ class InvoiceController extends Controller
         $invoice_no = Invoice::orderBy('id','desc')->first();
         if($invoice_no == null){
             $num = '0';
-            $invoice_no = $num + 1;
+            $invoice_no = $num+1;
         }else{
-            $invoice_no = Invoice::orderBy('id','desc')->first();
-            $invoice_no = $invoice_no + 1;
+            $invoice_no = Invoice::orderBy('id','desc')->first()->invoice_no;
+            $invoice_no = $invoice_no+1 ;
         }
         $categories = Category::all();
         $costomers = Customer::all();
-        return view ('backend.invoice.add_invoice',compact('categories','date','invoice_no','costomers'));   
+        return view ('backend.invoice.add_invoice',compact('categories','date','invoice_no','costomers'));
     }//end method
 
-    // invoice insert 
+    // invoice insert
     public function insertInvoice(Request $request){
         $category_id = $request->category_id;
         if($category_id == null){
-            
+
             $notification = array(
-                'message' => 'Sorry You do not select any item', 
+                'message' => 'Sorry You do not select any item',
                 'alert-type' => 'error'
             );
 
@@ -58,7 +59,7 @@ class InvoiceController extends Controller
             if($request->paid_amount > $request->estimated_amount){
 
                 $notification = array(
-                    'message' => 'Sorry Paid Amount is Maximum the total price', 
+                    'message' => 'Sorry Paid Amount is Maximum the total price',
                     'alert-type' => 'error'
                     );
                 return redirect()->back()->with($notification);
@@ -66,11 +67,86 @@ class InvoiceController extends Controller
                 $invoice = new Invoice();
                 $invoice->invoice_no = $request->invoice_no;
                 $invoice->date = date('Y-m-d',strtotime($request->date));
-            }
+                $invoice->description = $request->description;
+                $invoice->status = '0';
+                $invoice->created_by = Auth::user()->id;
 
+                DB::transaction(function() use($request,$invoice){
+                    if($invoice->save()){
+
+                        $count_category = count($request->category_id);
+                        for($i = 0; $i < $count_category; $i++ ){
+
+                            $invoice_details = new InvoiceDetail();
+                            $invoice_details->date = date('Y-m-d',strtotime($request->date));
+                            $invoice_details->invoice_id = $request->invoice_id;
+                            $invoice_details->category_id = $request->category_id[$i];
+                            $invoice_details->product_id = $request->product_id[$i];
+                            $invoice_details->selling_qty = $request->selling_qty[$i];
+                            $invoice_details->unit_price = $request->unit_price[$i];
+                            $invoice_details->selling_price = $request->selling_price[$i];
+                            $invoice_details->status = '0';
+                            $invoice_details->save();
+
+                        }
+                        // customer insert
+                        if($request->customer_id == '0'){
+
+                        $customer = new Customer();
+                        $customer->name = $request->name;
+                        $customer->mobile_no = $request->mobile_no;
+
+                        }else{
+
+                            $customer_id = $request->customer_id;
+
+                        } // end customer insert
+
+                        $payment = new Payment();
+                        $payment_details = new PaymentDetail();
+                        $payment->invoice_id = $invoice->id;
+                        $payment->customer_id = $customer_id;
+                        $payment->paid_status = $request->paid_status;
+                        $payment->discount_amount = $request->discount_amount;
+                        $payment->total_amount = $request->estimated_amount;
+
+                        if($request->paid_status == 'full_paid'){
+                            $payment->paid_amount = $request->estimated_amount;
+                            $payment->due_amount = '0';
+                            $payment_details = $request->current_payment_amount = '0';
+
+                        }elseif($request->paid_status == 'full_due'){
+                            $payment->paid_amount = '0';
+                            $payment->due_amount = $request->estimated_amount;
+                            $payment_details = $request->current_payment_amount = '0';
+
+                        }elseif($request->paid_status == 'partial_paid'){
+
+                            $payment->paid_amount = $request->paid_amount;
+                            $payment->due_amount = $request->estimated_amount - $request->paid_amount;
+                            $payment_details = $request->current_payment_amount = $request->paid_amount;
+                            $payment->save();
+                            $payment_details->invoice_id = $invoice->id;
+                            $payment_details->date = date('Y-m-d',strtotime($request->date));
+                            $payment_details->save();
+
+                        }
+
+
+                    }
+
+                });
+
+            }// end else
+
+            $notification = array(
+                'message' => 'Invoice Data Inserted Successfully',
+                'alert-type' => 'success'
+            );
+            return redirect()->route('view.invoices')->with($notification);
         }
-        
 
-        
+
+
     } //end method
 }
