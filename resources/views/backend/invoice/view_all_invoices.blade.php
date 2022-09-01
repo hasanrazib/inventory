@@ -27,9 +27,9 @@
                         <thead>
                         <tr>
                             <th>Sl</th>
-                            <th>Customer Name</th>
                             <th>Invoice No </th>
                             <th>Date </th>
+                            <th>Customer Name</th>
                             <th>Desctipion</th>
                             <th>Action</th>
 
@@ -41,10 +41,8 @@
                                     <td> {{ $key+1}} </td>
                                     <td> {{ $item->invoice_no }} </td>
                                     <td> {{ date('d-m-Y',strtotime($item->date)) }} </td>
-                                    <td> {{ $item->invoice_no }} </td>
-                                    <td> {{ $item ['category']['cat_name'] }} </td>
-                                    <td> {{ $item->buying_qty }} </td>
-                                    <td> {{ $item ['product']['name'] }} </td>
+                                    <td>d</td>
+                                    <td>{{$item->description}}</td>
                                     <td>
                                         @if($item->status == '0')
                                         <span class="btn btn-warning">Pending</span>

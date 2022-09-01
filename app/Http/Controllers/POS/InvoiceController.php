@@ -79,7 +79,7 @@ class InvoiceController extends Controller
 
                             $invoice_details = new InvoiceDetail();
                             $invoice_details->date = date('Y-m-d',strtotime($request->date));
-                            $invoice_details->invoice_id = $request->invoice_id;
+                            $invoice_details->invoice_id = $invoice->id;
                             $invoice_details->category_id = $request->category_id[$i];
                             $invoice_details->product_id = $request->product_id[$i];
                             $invoice_details->selling_qty = $request->selling_qty[$i];
@@ -95,6 +95,9 @@ class InvoiceController extends Controller
                         $customer = new Customer();
                         $customer->name = $request->name;
                         $customer->mobile_no = $request->mobile_no;
+                        $customer->email = $request->email;
+                        $customer->save();
+                        $customer_id = $customer->id;
 
                         }else{
 
