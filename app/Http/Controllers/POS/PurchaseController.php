@@ -29,7 +29,7 @@ class PurchaseController extends Controller
         $suppliers = Supplier::all();
         $categories = Category::all();
 
-        return view('',compact('suppliers','categories'));
+        return view('backend.purchase.add_purchase',compact('suppliers','categories'));
     }
 
     // inset product
@@ -59,7 +59,7 @@ class PurchaseController extends Controller
                 $purchase->buying_price = $request->buying_price[$i];
                 $purchase->description = $request->description[$i];
 
-                $purchase->created_by = Auth::user()->id;zz
+                $purchase->created_by = Auth::user()->id;
                 $purchase->status = '0';
                 $purchase->save();
             } // end foreach
