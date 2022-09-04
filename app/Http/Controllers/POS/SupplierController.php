@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Models\Supplier;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 
 class SupplierController extends Controller
@@ -26,9 +26,9 @@ class SupplierController extends Controller
 
     }
 
-    // insert supplier 
+    // insert supplier
     public function insertSuplier(Request $request){
-        
+
         Supplier::insert([
 
             'name' => $request->name,
@@ -38,9 +38,9 @@ class SupplierController extends Controller
             'created_by' => Auth::User()->id,
             'created_at' => Carbon::now(),
 
-        ]); 
+        ]);
         $notification = array(
-        'message' => 'Supplier Add Successfully', 
+        'message' => 'Supplier Add Successfully',
         'alert-type' => 'success'
     );
 
@@ -55,7 +55,7 @@ class SupplierController extends Controller
         $supplier = Supplier::findOrFail($id);
         return view('backend.supplier.edit_supplier',compact('supplier'));
 
-       
+
     } // End Method
 
     // update supplier
@@ -71,7 +71,7 @@ class SupplierController extends Controller
         ]);
 
         $notification = array(
-            'message' => 'Supplier Updated Successfully', 
+            'message' => 'Supplier Updated Successfully',
             'alert-type' => 'success'
         );
 
@@ -86,11 +86,11 @@ class SupplierController extends Controller
         Supplier::findOrFail($id)->delete();
 
          $notification = array(
-            'message' => 'Supplier Deleted Successfully', 
+            'message' => 'Supplier Deleted Successfully',
             'alert-type' => 'success'
         );
 
-        return redirect()->back()->with($notification);       
+        return redirect()->back()->with($notification);
 
     } // End Method
 

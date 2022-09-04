@@ -9,7 +9,7 @@ use App\Models\Supplier;
 use App\Models\Unit;
 use App\Models\Category;
 use App\Models\Product;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -47,11 +47,11 @@ class ProductController extends Controller
         ]);
 
         $notification = array(
-            'message' => 'Product Inserted Successfully', 
+            'message' => 'Product Inserted Successfully',
             'alert-type' => 'success'
         );
 
-        return redirect()->route('view.products')->with($notification); 
+        return redirect()->route('view.products')->with($notification);
     }
 
     // edit product page
@@ -67,7 +67,7 @@ class ProductController extends Controller
 
     // update product page
     public function updateProduct(Request $request){
-        
+
         $id = $request->id;
 
         Product::findOrFail($id)->update([
@@ -80,7 +80,7 @@ class ProductController extends Controller
         ]);
 
         $notification = array(
-            'message' => 'Product Updated Successfully', 
+            'message' => 'Product Updated Successfully',
             'alert-type' => 'success'
         );
 
@@ -93,15 +93,15 @@ class ProductController extends Controller
         Product::findOrFail($id)->delete();
 
         $notification = array(
-            'message' => 'Product Deleted Successfully', 
+            'message' => 'Product Deleted Successfully',
             'alert-type' => 'success'
         );
 
-        return redirect()->back()->with($notification);       
+        return redirect()->back()->with($notification);
     }//end method
 
 
 
-    
+
 
 }

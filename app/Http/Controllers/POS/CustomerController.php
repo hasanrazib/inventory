@@ -6,11 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Models\Customer;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
 {
-    
+
 // view all suppliers
 public function viewAllCustomer(){
 
@@ -26,9 +26,9 @@ public function addCustomer(){
 
 }
 
-// insert supplier 
+// insert supplier
 public function insertCustomer(Request $request){
-    
+
     Customer::insert([
 
         'name' => $request->name,
@@ -38,9 +38,9 @@ public function insertCustomer(Request $request){
         'created_by' => Auth::User()->id,
         'created_at' => Carbon::now(),
 
-    ]); 
+    ]);
     $notification = array(
-    'message' => 'Customer Add Successfully', 
+    'message' => 'Customer Add Successfully',
     'alert-type' => 'success'
 );
 
@@ -55,7 +55,7 @@ public function editCustomer($id){
     $customer = Customer::findOrFail($id);
     return view('backend.customer.edit_customer',compact('customer'));
 
-   
+
 } // End Method
 
 // update supplier
@@ -71,7 +71,7 @@ public function updateCustomer(Request $request){
     ]);
 
     $notification = array(
-        'message' => 'Customer Updated Successfully', 
+        'message' => 'Customer Updated Successfully',
         'alert-type' => 'success'
     );
 
@@ -86,13 +86,13 @@ public function deleteCustomer($id){
     Customer::findOrFail($id)->delete();
 
      $notification = array(
-        'message' => 'Customer Deleted Successfully', 
+        'message' => 'Customer Deleted Successfully',
         'alert-type' => 'success'
     );
 
-    return redirect()->back()->with($notification);       
+    return redirect()->back()->with($notification);
 
 } // End Method
 
-    
+
 }

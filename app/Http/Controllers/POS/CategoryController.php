@@ -6,11 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Models\Category;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
-    
+
     // view all category
     public function viewAllCategory(){
 
@@ -37,7 +37,7 @@ class CategoryController extends Controller
 
         ]);
         $notification = array(
-            'message' => 'Category Add Successfully', 
+            'message' => 'Category Add Successfully',
             'alert-type' => 'success'
         );
 
@@ -48,7 +48,7 @@ class CategoryController extends Controller
 
     //edit method
     public function editCategory($id){
-            
+
         $category = Category::findOrFail($id);
         return view('backend.category.edit_category',compact('category'));
     }
@@ -64,7 +64,7 @@ class CategoryController extends Controller
         ]);
 
         $notification = array(
-            'message' => 'Category Updated Successfully', 
+            'message' => 'Category Updated Successfully',
             'alert-type' => 'success'
         );
 
@@ -78,11 +78,11 @@ class CategoryController extends Controller
         Category::findOrFail($id)->delete();
 
          $notification = array(
-            'message' => 'Category Deleted Successfully', 
+            'message' => 'Category Deleted Successfully',
             'alert-type' => 'success'
         );
 
-        return redirect()->back()->with($notification);       
+        return redirect()->back()->with($notification);
 
     } // End Method
 

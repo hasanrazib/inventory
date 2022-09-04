@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Models\Unit;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class UnitController extends Controller
 {
@@ -33,7 +33,7 @@ class UnitController extends Controller
 
         ]);
         $notification = array(
-            'message' => 'Unit Add Successfully', 
+            'message' => 'Unit Add Successfully',
             'alert-type' => 'success'
         );
 
@@ -43,7 +43,7 @@ class UnitController extends Controller
 
     //edit method
     public function editUnit($id){
-        
+
         $unit = Unit::findOrFail($id);
         return view('backend.unit.edit_unit',compact('unit'));
     }
@@ -60,7 +60,7 @@ class UnitController extends Controller
         ]);
 
         $notification = array(
-            'message' => 'Unit Updated Successfully', 
+            'message' => 'Unit Updated Successfully',
             'alert-type' => 'success'
         );
 
@@ -74,11 +74,11 @@ class UnitController extends Controller
         Unit::findOrFail($id)->delete();
 
          $notification = array(
-            'message' => 'Unit Deleted Successfully', 
+            'message' => 'Unit Deleted Successfully',
             'alert-type' => 'success'
         );
 
-        return redirect()->back()->with($notification);       
+        return redirect()->back()->with($notification);
 
     } // End Method
 

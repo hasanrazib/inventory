@@ -32,7 +32,7 @@ Route::controller(DemoController::class)->group(function () {
 });
 
 
-// Admin All Route 
+// Admin All Route
 Route::controller(AdminController::class)->group(function () {
     Route::get('/admin/logout', 'destroy')->name('admin.logout');
     Route::get('/admin/profile', 'Profile')->name('admin.profile');
@@ -40,11 +40,11 @@ Route::controller(AdminController::class)->group(function () {
     Route::post('/store/profile', 'StoreProfile')->name('store.profile');
     Route::get('/change/password', 'ChangePassword')->name('change.password');
     Route::post('/update/password', 'UpdatePassword')->name('update.password');
-     
+
 });
 
 
-// Supplier All Route 
+// Supplier All Route
 Route::controller(SupplierController::class)->group(function () {
     Route::get('/supplier/add', 'addSupplier')->name('add.supplier');
     Route::post('/supplier/insert', 'insertSuplier')->name('insert.supplier');
@@ -52,10 +52,10 @@ Route::controller(SupplierController::class)->group(function () {
     Route::post('/supplier/update', 'updateSupplier')->name('update.supplier');
     Route::get('/supplier/delete/{id}', 'deleteSupplier')->name('delete.supplier');
     Route::get('/supplier/all', 'viewAllSupplier')->name('view.suppliers');
-    
-     
+
+
 });
-// Customer All Route 
+// Customer All Route
 Route::controller(CustomerController::class)->group(function () {
     Route::get('/customer/add', 'addCustomer')->name('add.customer');
     Route::post('/customer/insert', 'insertCustomer')->name('insert.customer');
@@ -63,11 +63,11 @@ Route::controller(CustomerController::class)->group(function () {
     Route::post('/customer/update', 'updateCustomer')->name('update.customer');
     Route::get('/customer/delete/{id}', 'deleteCustomer')->name('delete.customer');
     Route::get('/customer/all', 'viewAllCustomer')->name('view.customers');
-    
-     
+
+
 });
 
-// Unit All Route 
+// Unit All Route
 Route::controller(UnitController::class)->group(function () {
     Route::get('/unit/add', 'addUnit')->name('add.unit');
     Route::post('/unit/insert', 'insertUnit')->name('insert.unit');
@@ -75,12 +75,12 @@ Route::controller(UnitController::class)->group(function () {
     Route::post('/unit/update/','updateUnit')->name('update.unit');
     Route::get('/unit/delete/{id}','deleteUnit')->name('delete.unit');
     Route::get('/unit/all', 'viewAllUnit')->name('view.units');
-   
-    
-     
+
+
+
 });
 
-// Category All Route 
+// Category All Route
 Route::controller(CategoryController::class)->group(function () {
     Route::get('/category/add', 'addCategory')->name('add.category');
     Route::post('/category/insert', 'insertCategory')->name('insert.category');
@@ -88,12 +88,12 @@ Route::controller(CategoryController::class)->group(function () {
     Route::post('/category/update/','updateCategory')->name('update.category');
     Route::get('/category/delete/{id}','deleteCategory')->name('delete.category');
     Route::get('/category/all', 'viewAllCategory')->name('view.categories');
-   
-    
-     
+
+
+
 });
 
-// Product All Route 
+// Product All Route
 Route::controller(ProductController::class)->group(function () {
     Route::get('/product/add', 'addProduct')->name('add.product');
     Route::post('/product/insert', 'insertProduct')->name('insert.product');
@@ -101,10 +101,10 @@ Route::controller(ProductController::class)->group(function () {
     Route::post('/product/update/','updateProduct')->name('update.product');
     Route::get('/product/delete/{id}','deleteProduct')->name('delete.product');
     Route::get('/product/all', 'viewAllProduct')->name('view.products');
-   
-   
-    
-     
+
+
+
+
 });
 
 
@@ -116,8 +116,8 @@ Route::controller(PurchaseController::class)->group(function () {
     Route::get('/purchases/pending','pendingPurchase')->name('pending.purchase');
     Route::get('/purchase/approve/{id}', 'approvePurchase')->name('approve.purchase');
     Route::get('/purchases/all', 'viewAllPurchases')->name('view.purchases');
-    
-   
+
+
 
 });
 
@@ -126,8 +126,8 @@ Route::controller(InvoiceController::class)->group(function () {
     Route::get('/invoice/add', 'addInvoice')->name('add.invoice');
     Route::post('/invoice/insert', 'insertInvoice')->name('insert.invoice');
     Route::get('/invoice/all', 'viewAllInvoice')->name('view.invoices');
-    
-    
+
+
 
 });
 
@@ -139,10 +139,10 @@ Route::controller(DefaultController::class)->group(function () {
     Route::get('/get-category', 'getCategory')->name('get-category');
     Route::get('/get-product', 'getProduct')->name('get-product');
     Route::get('/get-stock', 'getStock')->name('check-product-stock');
-   
-   
-    
-     
+
+
+
+
 });
 
 

@@ -10,13 +10,13 @@ use App\Models\Customer;
 use App\Models\Unit;
 use App\Models\Category;
 use App\Models\Product;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Invoice;
 use App\Models\InvoiceDetail;
 use App\Models\Payment;
 use App\Models\PaymentDetail;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 
 class InvoiceController extends Controller

@@ -10,14 +10,14 @@ use App\Models\Unit;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Purchase;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class DefaultController extends Controller
 {
     //get categories by ajax filtering
     public function getCategory(Request $request){
         $supplier_id = $request->supplier_id;
-        
+
         $allCategory = Product::with(['category'])->select('category_id')->where('supplier_id',$supplier_id)->groupBy('category_id')->get();
         return response()->json($allCategory);
 
@@ -26,12 +26,12 @@ class DefaultController extends Controller
     // get products by ajax filtering
     public function getProduct(Request $request){
 
-        $category_id = $request->category_id; 
+        $category_id = $request->category_id;
         $allProduct = Product::where('category_id',$category_id)->get();
         return response()->json($allProduct);
-    } // end mehtod 
+    } // end mehtod
 
-    // get stock 
+    // get stock
     public function getStock(Request $request){
         $product_id = $request->product_id;
         $stocks = Product::where('id',$product_id)->first()->quantity;
@@ -39,6 +39,6 @@ class DefaultController extends Controller
         return response()->json($stocks);
     }//end get stock method
 
-    
+
 
 }
