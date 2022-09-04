@@ -112,7 +112,7 @@ class InvoiceController extends Controller
                         $payment->paid_status = $request->paid_status;
                         $payment->discount_amount = $request->discount_amount;
                         $payment->total_amount = $request->estimated_amount;
-
+                        $payment->save();
                         if($request->paid_status == 'full_paid'){
                             $payment->paid_amount = $request->estimated_amount;
                             $payment->due_amount = '0';
@@ -127,13 +127,14 @@ class InvoiceController extends Controller
 
                             $payment->paid_amount = $request->paid_amount;
                             $payment->due_amount = $request->estimated_amount - $request->paid_amount;
-                            $payment_details = $request->current_payment_amount = $request->paid_amount;
-                            $payment->save();
-                            $payment_details->invoice_id = $invoice->id;
-                            $payment_details->date = date('Y-m-d',strtotime($request->date));
-                            $payment_details->save();
+                            $payment_details->current_paid_amount = $request->paid_amount;
+
 
                         }
+                        $payment->save();
+                        $payment_details->invoice_id = $invoice->id;
+                        $payment_details->date = date('Y-m-d',strtotime($request->date));
+                        $payment_details->save();
 
 
                     }
