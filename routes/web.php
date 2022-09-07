@@ -14,13 +14,6 @@ use App\Http\Controllers\POS\DefaultController;
 
 
 
-
-
-
-
-
-
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -125,6 +118,8 @@ Route::controller(PurchaseController::class)->group(function () {
 Route::controller(InvoiceController::class)->group(function () {
     Route::get('/invoice/add', 'addInvoice')->name('add.invoice');
     Route::post('/invoice/insert', 'insertInvoice')->name('insert.invoice');
+    Route::get('/invoice/pending', 'pendingInvoice')->name('pending.invoice');
+    Route::get('/invoice/delete/{id}','deleteInvoice')->name('delete.invoice');
     Route::get('/invoice/all', 'viewAllInvoice')->name('view.invoices');
 
 

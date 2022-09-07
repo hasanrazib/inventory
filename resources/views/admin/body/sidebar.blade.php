@@ -3,7 +3,7 @@
                 <div data-simplebar class="h-100">
 
                     <!-- User details -->
-                
+
 
                     <!--- Sidemenu -->
                     <div id="sidebar-menu">
@@ -76,7 +76,7 @@
                                     <li><a href="{{ route('add.purchase') }}">Add Puchase</a></li>
                                     <li><a href="{{ route('pending.purchase') }}">Pending Purchases</a></li>
                                     <li><a href="{{ route('view.purchases') }}">View All Purchases</a></li>
-                                    
+
                                 </ul>
                             </li>
                             <li>
@@ -86,8 +86,9 @@
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
                                     <li><a href="{{ route('add.invoice') }}">Add Invoice</a></li>
+                                    <li><a href="{{ route('pending.invoice') }}">Pending Invoice</a></li>
                                     <li><a href="{{ route('view.invoices') }}">View All Invoices</a></li>
-                                    
+
                                 </ul>
                             </li>
                             <li>
@@ -151,10 +152,10 @@
                                 </ul>
                             </li>
 
-                           
 
-                            
-                         
+
+
+
 
                         </ul>
                     </div>

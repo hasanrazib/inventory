@@ -153,4 +153,26 @@ class InvoiceController extends Controller
 
 
     } //end method
+
+    // pending list
+    public function pendingInvoice(){
+
+        $pendings = Invoice::orderBy('date','desc')->orderBy('id','desc')->where('status','0')->get();
+
+        return view('backend.invoice.pending_list',compact('pendings'));
+    }//end method
+
+
+    // delete invoice method
+    public function deleteInvoice($id){
+
+        Invoice::findOrFail($id)->delete();
+
+        $notification = array(
+            'message' => 'Invoice Deleted Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
+    }
 }
