@@ -9,6 +9,7 @@ use App\Models\Supplier;
 use App\Models\Unit;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\location\District;
 use App\Models\Purchase;
 use Illuminate\Support\Facades\Auth;
 
@@ -39,6 +40,14 @@ class DefaultController extends Controller
         return response()->json($stocks);
     }//end get stock method
 
+  // get products by ajax filtering
+  public function getDistrict(Request $request){
 
+    $division_id = $request->division_id;
+
+    $districts = District::where('division_id', $division_id)->get();
+
+    return response()->json($districts);
+} // end mehtod
 
 }

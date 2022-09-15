@@ -88,7 +88,7 @@
                                     <li><a href="{{ route('add.invoice') }}">Add Invoice</a></li>
                                     <li><a href="{{ route('pending.invoice') }}">Pending Invoice</a></li>
                                     <li><a href="{{ route('view.invoices') }}">View All Invoices</a></li>
-
+                                    <li><a href="{{ route('dist.list') }}">District List</a></li>
                                 </ul>
                             </li>
                             <li>

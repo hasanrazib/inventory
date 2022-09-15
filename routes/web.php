@@ -121,6 +121,7 @@ Route::controller(InvoiceController::class)->group(function () {
     Route::get('/invoice/pending', 'pendingInvoice')->name('pending.invoice');
     Route::get('/invoice/delete/{id}','deleteInvoice')->name('delete.invoice');
     Route::get('/invoice/all', 'viewAllInvoice')->name('view.invoices');
+    Route::get('/invoice/list', 'divisionList')->name('dist.list');
 
 
 
@@ -135,6 +136,7 @@ Route::controller(DefaultController::class)->group(function () {
     Route::get('/get-product', 'getProduct')->name('get-product');
     Route::get('/get-stock', 'getStock')->name('check-product-stock');
 
+    Route::get('/get-district', 'getDistrict')->name('get-district-list');
 
 
 
