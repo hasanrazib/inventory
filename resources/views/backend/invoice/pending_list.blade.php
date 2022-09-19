@@ -53,7 +53,7 @@
                                     </td>
                                     <td>
                                         @if($item->status == '0')
-                    <a href="" class="btn btn-info sm" title="Approved" id="ApproveBtn">  <i class="fas fa-check-circle"></i> </a>
+                    <a href="{{route('approve.invoice', $item->id)}}" class="btn btn-info sm" title="Approved" >  <i class="fas fa-check-circle"></i> </a>
                     <a href="{{route('delete.invoice', $item->id)}}" class="btn btn-danger sm" title="Delete Data" id="delete">  <i class="fas fa-trash-alt"></i> </a></td>
                     @endif
                                     </td>
