@@ -38,6 +38,14 @@
                             </tbody>
                          </table>
 
+@php
+    $invoice_details = App\Models\InvoiceDetail::where('invoice_id',$invoice->id)->get();
+
+
+@endphp
+
+<form method="post" action="{{ route('aproval.invoice',$invoice->id) }}">
+    @csrf
                          <table border="1" class="table table-dark" width="100%">
                             <thead>
                                 <tr>
@@ -52,16 +60,53 @@
 
                             </thead>
                     <tbody>
+                        @php
+                        $total_sum = '0';
+                         @endphp
+                        @foreach($invoice_details as $key => $item)
+                        <tr>
+                        <td>{{$item->key+1}}</td>
+                        <td>{{ $item['category']['cat_name']  }}</td>
+                        <td>{{ $item['product']['name']  }}</td>
+                        <td>{{ $item['product']['quantity']  }}</td>
+                        <td>{{$item->selling_qty}}</td>
 
+                        <td>{{$item->unit_price}}</td>
+                        <td>{{$item->selling_price}}</td>
+                        </tr>
+                        @php
+                        $total_sum += $item->selling_price;
+                        @endphp
+                    @endforeach
+                        <tr>
+                            <td colspan="6"> Sub Total </td>
+                            <td >{{$total_sum}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="6"> Discount </td>
+                            <td >{{ $payment->discount_amount }}</td>
+                        </tr>
 
+                        <tr>
+                            <td colspan="6"> Paid Amount </td>
+                            <td >{{ $payment->paid_amount }}</td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="6"> Due Amount </td>
+                            <td > {{ $payment->due_amount }}</td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="6"><strong>Grand Amount</strong></td>
+                            <td >{{ $payment->total_amount }}</td>
+                        </tr>
                     </tbody>
 
                 </table>
 
-                <button type="submit" class="btn btn-info">Invoice Approve </button>
-
-
-
+                <button type="submit" class="btn btn-info" id="approvebttn">Invoice Approve </button>
+            </form>
 
 
 

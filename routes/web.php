@@ -121,7 +121,7 @@ Route::controller(InvoiceController::class)->group(function () {
     Route::get('/invoice/pending', 'pendingInvoice')->name('pending.invoice');
     Route::get('/invoice/delete/{id}','deleteInvoice')->name('delete.invoice');
     Route::get('/invoice/edit/{id}','editInvoice')->name('approve.invoice');
-
+    Route::post('/invoice/approve/{id}', 'approveInvoice')->name('aproval.invoice');
     Route::get('/invoice/all', 'viewAllInvoice')->name('view.invoices');
     Route::get('/invoice/list', 'divisionList')->name('dist.list');
 

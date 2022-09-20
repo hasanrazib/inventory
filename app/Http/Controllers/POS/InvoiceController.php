@@ -162,6 +162,13 @@ class InvoiceController extends Controller
 
     }
 
+
+    //approveInvoice
+
+    public function approveInvoice(){
+
+    }
+
     // delete invoice method
     public function deleteInvoice($id){
 
