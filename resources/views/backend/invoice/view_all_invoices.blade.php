@@ -32,7 +32,6 @@
                             <th>Customer Name</th>
                             <th>Desctipion</th>
                             <th>Status</th>
-                            <th>Action</th>
 
                         </thead>
                         <tbody>
@@ -50,11 +49,6 @@
                                         @elseif($item->status == '1')
                                         <span class="btn btn-success">Approved</span>
                                         @endif
-                                    </td>
-                                    <td>
-                                    @if($item->status == '0')
-                                    <a href="{{route('delete.invoice', $item->id)}}" class="btn btn-danger sm" title="Delete Data" id="delete">  <i class="fas fa-trash-alt"></i> </a></td>
-                                    @endif
                                     </td>
                                 </tr>
                             @endforeach

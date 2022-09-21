@@ -44,7 +44,7 @@
 
 @endphp
 
-<form method="post" action="{{ route('aproval.invoice',$invoice->id) }}">
+<form method="post" action="{{ route('aproval.invoice', $invoice->id) }}">
     @csrf
                          <table border="1" class="table table-dark" width="100%">
                             <thead>
@@ -63,19 +63,24 @@
                         @php
                         $total_sum = '0';
                          @endphp
-                        @foreach($invoice_details as $key => $item)
+                        @foreach($invoice['invoice_details'] as $key => $details)
                         <tr>
-                        <td>{{$item->key+1}}</td>
-                        <td>{{ $item['category']['cat_name']  }}</td>
-                        <td>{{ $item['product']['name']  }}</td>
-                        <td>{{ $item['product']['quantity']  }}</td>
-                        <td>{{$item->selling_qty}}</td>
 
-                        <td>{{$item->unit_price}}</td>
-                        <td>{{$item->selling_price}}</td>
+            <input type="hidden" name="category_id[]" value="{{ $details->category_id }}">
+            <input type="hidden" name="product_id[]" value="{{ $details->product_id }}">
+            <input type="hidden" name="selling_qty[{{$details->id}}]" value="{{ $details->selling_qty }}">
+
+                        <td>{{$details->key+1}}</td>
+                        <td>{{ $details['category']['cat_name']  }}</td>
+                        <td>{{ $details['product']['name']  }}</td>
+                        <td>{{ $details['product']['quantity']  }}</td>
+                        <td>{{$details->selling_qty}}</td>
+
+                        <td>{{$details->unit_price}}</td>
+                        <td>{{$details->selling_price}}</td>
                         </tr>
                         @php
-                        $total_sum += $item->selling_price;
+                        $total_sum += $details->selling_price;
                         @endphp
                     @endforeach
                         <tr>

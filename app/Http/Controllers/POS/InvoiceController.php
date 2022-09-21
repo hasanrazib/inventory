@@ -137,7 +137,7 @@ class InvoiceController extends Controller
                 'message' => 'Invoice Data Inserted Successfully',
                 'alert-type' => 'success'
             );
-            return redirect()->route('view.invoices')->with($notification);
+            return redirect()->route('pending.invoice')->with($notification);
         }
 
 
@@ -165,9 +165,50 @@ class InvoiceController extends Controller
 
     //approveInvoice
 
-    public function approveInvoice(){
 
-    }
+
+    public function approveInvoice(Request $request, $id){
+
+        foreach($request->selling_qty as $key => $val){
+            $invoice_details = InvoiceDetail::where('id',$key)->first();
+            $product = Product::where('id',$invoice_details->product_id)->first();
+            if($product->quantity < $request->selling_qty[$key]){
+
+        $notification = array(
+        'message' => 'Sorry you approve Maximum Value',
+        'alert-type' => 'error'
+    );
+    return redirect()->back()->with($notification);
+
+            }
+        } // End foreach
+
+        $invoice = Invoice::findOrFail($id);
+        $invoice->updated_by = Auth::user()->id;
+        $invoice->status = '1';
+
+        DB::transaction(function() use($request,$invoice,$id){
+            foreach($request->selling_qty as $key => $val){
+             $invoice_details = InvoiceDetail::where('id',$key)->first();
+
+             $invoice_details->status = '1';
+             $invoice_details->save();
+
+             $product = Product::where('id',$invoice_details->product_id)->first();
+             $product->quantity = ((float)$product->quantity) - ((float)$request->selling_qty[$key]);
+             $product->save();
+            } // end foreach
+
+            $invoice->save();
+        });
+
+    $notification = array(
+        'message' => 'Invoice Approve Successfully',
+        'alert-type' => 'success'
+    );
+    return redirect()->route('view.invoices')->with($notification);
+
+    } // End Method
 
     // delete invoice method
     public function deleteInvoice($id){
